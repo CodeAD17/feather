@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Feather — Turn your real work into viral LinkedIn posts. Build your personal brand on autopilot.">
+    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <title>Feather — LinkedIn Autopilot</title>
+    <style>
+        /* Iconic Neo-Brutalist Base - Refined */
+        :root {
+            /* Softer Dark Theme */
+            --bg: #09090b;
+            --fg: #e4e4e7;
+            --grid: #27272a;
+            --surface: #18181b;
+            --accent: #3b82f6;
+            --success: #10b981;
+
+            --font-main: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--fg);
+            font-family: var(--font-main);
+            overflow-x: hidden;
+            border-left: 1px solid var(--grid);
+            border-right: 1px solid var(--grid);
+            max-width: 1440px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        /* --- Creative Background --- */
+        .ambient-light {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100vw;
+            height: 100vh;
+            background:
+                radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.15), transparent 40%),
+                radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.05), transparent 30%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .grid-bg {
+            background-image:
+                linear-gradient(var(--grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: center top;
+            opacity: 0.08;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            z-index: -1;
+            /* Perspective for depth */
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+
+        /* --- Typography --- */
+        h1,
+        h2,
+        h3,
+        h4 {
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
+        }
+
+        /* Texture for Hero Text */
+        .text-texture {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.4'/%3E%3C/svg%3E"),
+                linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            background-size: 200px 200px, 100% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-texture-accent {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.4'/%3E%3C/svg%3E"),
+                linear-gradient(135deg, #3b82f6 0%, #2dd4bf 100%);
+            background-size: 200px 200px, 100% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- Components --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 48px;
+            background: var(--fg);
+            color: var(--bg);
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 1px solid var(--fg);
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0 rgba(59, 130, 246, 0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--fg);
+            border: 1px solid var(--grid);
+        }
+
+        .btn-outline:hover {
+            background: var(--surface);
+            border-color: var(--accent);
+            color: var(--fg);
+        }
+
+        .tag {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            padding: 6px 10px;
+            border: 1px solid var(--grid);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 24px;
+            color: #71717a;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 40px;
+            border-bottom: 1px solid var(--grid);
+            position: sticky;
+            top: 0;
+            background: rgba(9, 9, 11, 0.8);
+            backdrop-filter: blur(12px);
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 24px;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--fg);
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--grid);
+        }
+
+        /* --- HERO RENOVATION --- */
+        .hero {
+            min-height: 90vh;
+            /* slightly tighter */
+            display: flex;
+            /* Changed to row layout in desktop */
+            align-items: center;
+            justify-content: space-between;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-left {
+            max-width: 650px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(60px, 8vw, 110px);
+            /* Slightly adjusted for balance */
+            font-weight: 900;
+            margin-bottom: 32px;
+        }
+
+        .hero-desc {
+            font-size: 22px;
+            color: #a1a1aa;
+            max-width: 540px;
+            margin-bottom: 48px;
+            line-height: 1.5;
+        }
+
+        .hero-right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            perspective: 2000px;
+        }
+
+        /* 3D Code Card Effect */
+        .visual-stack {
+            position: relative;
+            width: 400px;
+            height: 500px;
+            transform-style: preserve-3d;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .code-card {
+            position: absolute;
+            background: #111113;
+            border: 1px solid var(--grid);
+            border-radius: 12px;
+            padding: 24px;
+            width: 380px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            /* Initial transform */
+            transform: rotateY(-15deg) rotateX(10deg);
+            transition: transform 0.5s ease;
+        }
+
+        .code-card:hover {
+            transform: rotateY(-5deg) rotateX(5deg) scale(1.02);
+            z-index: 10;
+        }
+
+        .card-back {
+            top: 40px;
+            left: 40px;
+            z-index: 1;
+            opacity: 0.6;
+            filter: blur(1px);
+        }
+
+        .card-front {
+            top: 0;
+            left: 0;
+            z-index: 2;
+            background: #18181b;
+            /* Lighter surface */
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .window-dots {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .w-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+
+        .red {
+            background: #ef4444;
+        }
+
+        .yellow {
+            background: #eab308;
+        }
+
+        .green {
+            background: #22c55e;
+        }
+
+        .code-line {
+            height: 8px;
+            background: var(--grid);
+            border-radius: 4px;
+            margin-bottom: 12px;
+            width: 100%;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Marquee */
+        .marquee {
+            border-bottom: 1px solid var(--grid);
+            overflow: hidden;
+            white-space: nowrap;
+            background: var(--surface);
+            color: var(--fg);
+            padding: 16px 0;
+            font-family: var(--font-mono);
+            font-weight: 900;
+            font-size: 24px;
+            text-transform: uppercase;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: scroll 40s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Sections */
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: 1px solid var(--grid);
+        }
+
+        .split-content {
+            padding: 100px 60px;
+            border-right: 1px solid var(--grid);
+            /* Restored border */
+        }
+
+        .split-content:last-child {
+            border-right: none;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-bottom: 1px solid var(--grid);
+        }
+
+        .bento-item {
+            border-right: 1px solid var(--grid);
+            padding: 60px 40px;
+        }
+
+        .bento-item:nth-child(3n) {
+            border-right: none;
+        }
+
+        .check-list li {
+            font-size: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--grid);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: #d4d4d8;
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            border-bottom: 1px solid var(--grid);
+        }
+
+        .test-card {
+            padding: 80px 60px;
+            border-right: 1px solid var(--grid);
+        }
+
+        /* Footer */
+        footer {
+            padding: 100px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .footer-logo {
+            font-size: 100px;
+            font-weight: 900;
+            color: var(--grid);
+            line-height: 0.8;
+            user-select: none;
+        }
+
+        @media (max-width: 1024px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 120px;
+            }
+
+            .hero-right {
+                margin-top: 60px;
+                width: 100%;
+                display: none;
+                /* Hide 3D on mobile for simplicity */
+            }
+
+            .hero-left {
+                max-width: 100%;
+            }
+
+            .hero-actions {
+                justify-content: center;
+            }
+
+            .split,
+            .bento-grid,
+            .test-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .split-content,
+            .bento-item,
+            .test-card {
+                border-right: none;
+                border-bottom: 1px solid var(--grid);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ambient-light"></div>
+    <div class="grid-bg"></div>
+
+    <header>
+        <a href="/" class="logo">
+            <img src="/logo.png" alt="Feather">
+            FEATHER
+        </a>
+        <nav style="display: flex; gap: 32px; align-items: center;">
+            <a href="#value"
+                style="color: var(--fg); text-decoration: none; font-weight: 500; font-size: 14px;">MANIFESTO</a>
+            <a href="/login" class="btn"
+                style="padding: 10px 24px; font-size: 14px; border: 1px solid var(--grid); background: transparent; color: var(--fg);">
+                GET ACCESS
+            </a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-left">
+            <span class="tag mono">v1.0.0 // BETA_RELEASE</span>
+            <h1>
+                <span class="text-texture">Don't Write.</span><br>
+                <span class="text-texture-accent">Just Ship.</span>
+            </h1>
+            <p class="hero-desc">
+                Your code tells a story. We transform your commits into a cult-following personal brand. No fluff. 100%
+                Signal.
+            </p>
+            <div class="hero-actions">
+                <a href="/github" class="btn">Start Autopilot</a>
+                <a href="#value" class="btn btn-outline">Read Manifesto</a>
+            </div>
+        </div>
+
+        <div class="hero-right">
+            <div class="visual-stack">
+                <!-- Background Decoration Card -->
+                <div class="code-card card-back">
+                    <div class="window-dots">
+                        <div class="w-dot red"></div>
+                        <div class="w-dot yellow"></div>
+                    </div>
+                    <div class="code-line" style="width: 60%"></div>
+                    <div class="code-line" style="width: 80%"></div>
+                    <div class="code-line" style="width: 40%"></div>
+                </div>
+
+                <!-- Main "Post" Card -->
+                <div class="code-card card-front">
+                    <div class="window-dots">
+                        <div class="w-dot green"></div> <span class="mono"
+                            style="font-size: 12px; opacity: 0.5;">generated_post.md</span>
+                    </div>
+                    <div style="font-family: var(--font-main); font-size: 18px; line-height: 1.5; color: #fff;">
+                        Just shipped the new <span class="accent">#Rust</span> compiler optimization! 🚀<br><br>
+                        Reduced build times by 40% using incremental compilation.
+                        <br><br>
+                        <div
+                            style="font-size: 14px; opacity: 0.7; margin-top: 16px; border-left: 2px solid var(--accent); padding-left: 12px;">
+                            commit: 8a92b3f<br>
+                            feat: optimize incremental builds
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="marquee">
+        <div class="marquee-content">
+            • SHIP FASTER • BUILD AUTHENTICALLY • NO GHOSTWRITERS • CODE TO CONTENT • SHIP FASTER • BUILD AUTHENTICALLY
+            • NO GHOSTWRITERS • CODE TO CONTENT
+        </div>
+    </div>
+
+    <!-- The Problem (Brutalist Split) -->
+    <section class="split" id="value">
+        <div class="split-content" style="background: linear-gradient(to bottom, #09090b, #000);">
+            <span class="tag mono" style="border-color: #333; color: #666;">OLD WAY</span>
+            <h2 style="color: #444; margin-bottom: 40px;">THE INVISIBLE DEV</h2>
+            <ul class="check-list">
+                <li style="color: #52525b;"><span class="mono">01.</span> Grinding 12h days in silence</li>
+                <li style="color: #52525b;"><span class="mono">02.</span> "I'll post when it's perfect"</li>
+                <li style="color: #52525b;"><span class="mono">03.</span> Watching marketers get hired</li>
+            </ul>
+        </div>
+        <div class="split-content">
+            <span class="tag mono" style="color: var(--accent); border-color: rgba(59, 130, 246, 0.3);">NEW WAY</span>
+            <h2 class="text-texture-accent" style="margin-bottom: 40px;">THE PUBLIC BUILDER</h2>
+            <ul class="check-list">
+                <li><span class="mono accent">01.</span> Ship code -> Auto-generate Post</li>
+                <li><span class="mono accent">02.</span> Build audience while you sleep</li>
+                <li><span class="mono accent">03.</span> Recruiters DM <strong>you</strong></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Value Matrix (Bento) -->
+    <section class="bento-grid">
+        <div class="bento-item">
+            <div class="mono" style="color: var(--accent);">// 01_SPEED</div>
+            <div style="margin-top: auto;">
+                <h3>30 SECONDS</h3>
+                <p>From `git push` to viral LinkedIn post. We parse your diffs and write the story for you.</p>
+            </div>
+        </div>
+        <div class="bento-item">
+            <div class="mono" style="color: var(--success);">// 02_GROWTH</div>
+            <div style="margin-top: auto;">
+                <h3>COMPOUNDING</h3>
+                <p>Every commit adds a brick to your reputation. Stop letting your hard work vanish.</p>
+            </div>
+        </div>
+        <div class="bento-item">
+            <div class="mono" style="color: #fff;">// 03_CONTROL</div>
+            <div style="margin-top: auto;">
+                <h3>AUTHENTIC</h3>
+                <p>No cringe AI slop. Tone controls let you sound like YOU (but on your best day).</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Massive CTA -->
+    <section style="padding: 120px 40px; text-align: center;">
+        <h2 style="font-size: clamp(50px, 10vw, 120px); margin-bottom: 20px;">
+            <span
+                style="color: #3f3f46; text-decoration: line-through; font-size: 0.5em; vertical-align: middle;">$29/mo</span>
+            <span class="success">FREE</span>
+        </h2>
+        <div class="mono" style="margin-bottom: 60px; color: #71717a;">
+            LIMITED BETA ACCESS
+        </div>
+        <a href="/github" class="btn" style="font-size: 24px; padding: 32px 64px; border-width: 2px;">
+            CLAIM YOUR SPOT
+        </a>
+    </section>
+
+    <footer>
+        <div class="footer-logo">FEATHER</div>
+        <div class="mono" style="text-align: right; color: #52525b;">
+            BUILD_ID: 2025.1.0<br>
+            ©2025
+        </div>
+    </footer>
+</body>
+
+</html>

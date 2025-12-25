@@ -1,0 +1,119 @@
+.settings-page {
+    min-height: 100vh;
+}
+
+.settings-sections {
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-section {
+    display: flex;
+    gap: var(--space-4);
+    padding: var(--space-5);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+}
+
+.settings-section:hover {
+    background: var(--bg-hover);
+}
+
+.section-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-muted);
+    color: var(--accent);
+    border-radius: var(--radius-full);
+    flex-shrink: 0;
+}
+
+.section-icon.github {
+    background: var(--bg-surface);
+    color: var(--text-primary);
+}
+
+.section-icon.data {
+    background: var(--success-muted);
+    color: var(--success);
+}
+
+.section-content {
+    flex: 1;
+}
+
+.section-content h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: var(--space-1);
+}
+
+.section-content>p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: var(--space-4);
+}
+
+.input-row {
+    display: flex;
+    gap: var(--space-3);
+}
+
+.input-row .input {
+    flex: 1;
+}
+
+.success-text {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    margin-top: var(--space-2);
+    font-size: 14px;
+    color: var(--success);
+}
+
+.error-text {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    margin-top: var(--space-2);
+    font-size: 14px;
+    color: var(--error);
+}
+
+.help-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    margin-top: var(--space-3);
+    font-size: 14px;
+    color: var(--accent);
+}
+
+.data-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+.danger-text {
+    color: var(--error);
+}
+
+/* Save Bar */
+.save-bar {
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    padding: var(--space-5);
+    background: var(--bg-base);
+    border-top: 1px solid var(--border);
+}
+
+.save-bar .btn {
+    min-width: 220px;
+}
