@@ -69,6 +69,12 @@
   --right-sidebar-width: 350px;
 }
 
+@media (max-width: 1024px) {
+  :root {
+    --right-sidebar-width: 0px;
+  }
+}
+
 /* Reset */
 *,
 *::before,
@@ -332,6 +338,12 @@ a:hover {
   z-index: 10;
 }
 
+@media (max-width: 640px) {
+  .page-header {
+    display: none;
+  }
+}
+
 .page-title {
   font-size: var(--text-xl);
   font-weight: 700;
@@ -478,5 +490,13 @@ a:hover {
 @media (max-width: 640px) {
   .main-content {
     margin-left: 0;
+    margin-right: 0;
+    margin-right: 0;
+    padding-bottom: 70px;
+    /* Space for Bottom Nav */
+    padding-top: 60px;
+    /* Space for Mobile Header */
+    border-left: none;
+    border-right: none;
   }
 }

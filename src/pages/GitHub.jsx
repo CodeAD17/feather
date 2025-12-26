@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Github, Loader2, Sparkles, Copy, Check, AlertCircle, Users, BookOpen, Wand2, Send, Search, Lock } from 'lucide-react';
 import GitHubCard from '../components/GitHubCard';
+import RepoSelector from '../components/RepoSelector';
 import { fetchUserProfile, fetchUserRepos, getWeeklyActivitySummary, formatRepoData } from '../utils/github';
 import { generateGitHubPost } from '../utils/ai';
 import { saveDraft, getSettings, saveSettings, getGitHubData, saveGitHubData } from '../utils/storage';
@@ -23,6 +24,7 @@ function GitHub() {
     const [copied, setCopied] = useState(false);
     const [tone, setTone] = useState('professional');
     const [repoSearch, setRepoSearch] = useState('');
+    const [showRepoSelector, setShowRepoSelector] = useState(false);
     const [githubToken, setGithubToken] = useState('');
     const [showToken, setShowToken] = useState(false);
 
@@ -208,7 +210,12 @@ function GitHub() {
 
                 {/* Selected repos */}
                 <div className="selected-repos">
-                    <label>Selected Repositories</label>
+                    <div className="selected-repos-header">
+                        <label>Selected Repositories</label>
+                        <button className="btn-select-repos" onClick={() => setShowRepoSelector(true)}>
+                            + Select Repos
+                        </button>
+                    </div>
                     {selectedRepos.length === 0 ? (
                         <p className="no-repos">Select repositories from the right panel →</p>
                     ) : (
@@ -333,6 +340,15 @@ function GitHub() {
                         ))}
                 </div>
             </aside>
+
+            {/* Mobile/Modal Repo Selector */}
+            <RepoSelector
+                isOpen={showRepoSelector}
+                onClose={() => setShowRepoSelector(false)}
+                repos={repos}
+                selectedRepos={selectedRepos}
+                onToggle={handleRepoSelect}
+            />
         </div>
     );
 }

@@ -437,3 +437,66 @@
         display: none;
     }
 }
+
+@media (max-width: 640px) {
+    .stats-row {
+        flex-wrap: wrap;
+    }
+
+    .stat-box {
+        flex: 1 1 33.33%;
+        /* 3 columns on mobile if possible, or wrap */
+        border-right: none;
+        padding: var(--space-2);
+    }
+
+    .github-profile-card {
+        padding: var(--space-4);
+    }
+
+    .profile-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-3);
+    }
+
+    .profile-avatar {
+        width: 48px;
+        height: 48px;
+    }
+
+    .profile-info {
+        width: 100%;
+    }
+
+    .btn-secondary.btn-sm {
+        position: absolute;
+        top: var(--space-4);
+        right: var(--space-4);
+    }
+}
+
+/* New Select Button Styles */
+.selected-repos-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-2);
+}
+
+.selected-repos-header label {
+    margin-bottom: 0;
+}
+
+.btn-select-repos {
+    font-size: 13px;
+    color: var(--accent);
+    background: none;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-select-repos:hover {
+    text-decoration: underline;
+}

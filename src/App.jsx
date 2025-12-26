@@ -10,6 +10,9 @@ import GitHub from './pages/GitHub';
 import Queue from './pages/Queue';
 import Settings from './pages/Settings';
 import Login from './pages/Login';
+import BottomNav from './components/BottomNav';
+import MobileHeader from './components/MobileHeader';
+import MobilePostButton from './components/MobilePostButton';
 import { Link } from 'react-router-dom';
 import { Lightbulb, TrendingUp, Sparkles, ExternalLink } from 'lucide-react';
 import './App.css';
@@ -161,6 +164,7 @@ function App() {
             </Routes>
           ) : (
             <div className="app-layout">
+              <MobileHeader />
               <Sidebar />
               <main className="main-content">
                 <Routes>
@@ -176,6 +180,8 @@ function App() {
               <RightSidebar>
                 {getRightSidebarContent()}
               </RightSidebar>
+              <BottomNav />
+              <MobilePostButton />
             </div>
           )}
         </GitHubContext.Provider>

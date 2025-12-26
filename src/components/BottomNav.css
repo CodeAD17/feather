@@ -1,0 +1,72 @@
+/* Bottom Navigation */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 56px;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    display: none;
+    /* Hidden by default, shown on mobile */
+    align-items: center;
+    justify-content: space-around;
+    border-top: 1px solid var(--border);
+    z-index: 100;
+}
+
+.bottom-nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: var(--text-secondary);
+    transition: color 0.2s;
+}
+
+.bottom-nav-item.active {
+    color: var(--text-primary);
+}
+
+.bottom-nav-item.active svg {
+    stroke-width: 2.5px;
+}
+
+/* Floating Action Button (FAB) */
+.mobile-fab {
+    position: fixed;
+    bottom: 72px;
+    /* Above bottom nav (56px + 16px) */
+    right: 16px;
+    width: 56px;
+    height: 56px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: none;
+    /* Hidden by default */
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 4px 12px rgba(29, 155, 240, 0.3);
+    border: none;
+    z-index: 101;
+    cursor: pointer;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.mobile-fab:active {
+    transform: scale(0.95);
+}
+
+
+/* Media Query for Mobile */
+@media (max-width: 640px) {
+    .bottom-nav {
+        display: flex;
+    }
+
+    .mobile-fab {
+        display: flex;
+    }
+}
