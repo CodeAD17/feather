@@ -8,7 +8,12 @@ function ConnectModal({ isOpen, onClose }) {
 
     // GitHub App Configuration
     const GITHUB_CLIENT_ID = import.meta.env.VITE_GITHUB_CLIENT_ID;
-    const REDIRECT_URI = 'http://localhost:3000/api/auth/callback';
+
+    // Dynamic redirect URI based on environment
+    const isProduction = window.location.hostname !== 'localhost';
+    const REDIRECT_URI = isProduction
+        ? `${window.location.origin}/api/auth/callback`
+        : 'http://localhost:3000/api/auth/callback';
 
     const handleGitHubConnect = () => {
         if (!GITHUB_CLIENT_ID) {
@@ -16,7 +21,7 @@ function ConnectModal({ isOpen, onClose }) {
             return;
         }
         // Redirect to GitHub OAuth
-        window.location.href = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=repo,read:user`;
+        window.location.href = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=repo,read:user`;
     };
 
     if (!isOpen) return null;
