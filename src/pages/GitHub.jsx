@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Github, Loader2, Sparkles, Copy, Check, AlertCircle, Users, BookOpen, Wand2, Send, Search, Lock } from 'lucide-react';
 import GitHubCard from '../components/GitHubCard';
 import RepoSelector from '../components/RepoSelector';
+import ConnectModal from '../components/ConnectModal';
 import { fetchUserProfile, fetchUserRepos, getWeeklyActivitySummary, formatRepoData } from '../utils/github';
 import { generateGitHubPost } from '../utils/ai';
 import { saveDraft, getSettings, saveSettings, getGitHubData, saveGitHubData } from '../utils/storage';
@@ -29,6 +30,16 @@ function GitHub() {
     const [showToken, setShowToken] = useState(false);
 
     useEffect(() => {
+        // Check for token in URL query params (from OAuth redirect)
+        const searchParams = new URLSearchParams(window.location.search);
+        const tokenFromUrl = searchParams.get('token');
+
+        if (tokenFromUrl) {
+            handleConnect(null, tokenFromUrl); // Pass token, username will be fetched
+            // Clean URL
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+
         const settings = getSettings();
         if (settings.githubUsername) setUsername(settings.githubUsername);
         if (settings.githubToken) setGithubToken(settings.githubToken);
@@ -40,24 +51,39 @@ function GitHub() {
         }
     }, []);
 
-    const handleConnect = async () => {
-        if (!username.trim()) { setError('Enter a GitHub username'); return; }
-        setError('');
+    const handleConnect = async (user, token) => {
         setLoading(true);
         try {
+            // If user string is null (from OAuth), we need to fetch profile first to get the login
+            let targetUser = user;
+            if (!targetUser && token) {
+                // Fetch authenticated user profile
+                const response = await fetch('https://api.github.com/user', {
+                    headers: { Authorization: `token ${token}` }
+                });
+                if (!response.ok) throw new Error('Failed to fetch user with token');
+                const userData = await response.json();
+                targetUser = userData.login;
+            }
+
+            if (!targetUser) throw new Error('No username provided');
+
             const [userProfile, userRepos, summary] = await Promise.all([
-                fetchUserProfile(username),
-                fetchUserRepos(username),
-                getWeeklyActivitySummary(username),
+                fetchUserProfile(targetUser, token),
+                fetchUserRepos(targetUser, token),
+                getWeeklyActivitySummary(targetUser, token),
             ]);
             const formatted = userRepos.map(formatRepoData);
             setProfile(userProfile);
             setRepos(formatted);
             setActivitySummary(summary);
             saveGitHubData({ profile: userProfile, repos: formatted, activitySummary: summary });
-            saveSettings({ githubUsername: username, githubToken: githubToken });
+            saveSettings({ githubUsername: targetUser, githubToken: token });
+            setUsername(targetUser);
+            setShowConnectModal(false); // Close modal if open
         } catch (err) {
-            setError('User not found');
+            console.error(err);
+            setError(err.message || 'Connection failed');
         } finally {
             setLoading(false);
         }
@@ -111,49 +137,20 @@ function GitHub() {
                         <div className="connect-icon"><Github size={48} /></div>
                         <h2>Connect your GitHub</h2>
                         <p>Import your activity and create posts</p>
-                        <div className="connect-form">
-                            <input
-                                type="text"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                                placeholder="Enter username"
-                                className="input"
-                                onKeyDown={(e) => e.key === 'Enter' && handleConnect()}
-                            />
-                            <motion.button className="btn btn-primary" onClick={handleConnect} disabled={loading} whileTap={{ scale: 0.98 }}>
-                                {loading ? <Loader2 size={18} className="spinning" /> : 'Connect'}
-                            </motion.button>
-                        </div>
-
-                        {/* Token section */}
-                        <div className="token-section">
-                            <button className="token-toggle" onClick={() => setShowToken(!showToken)}>
-                                <Lock size={14} />
-                                {showToken ? 'Hide' : 'Add'} token for private repos
-                            </button>
-                            {showToken && (
-                                <motion.div
-                                    className="token-input-wrapper"
-                                    initial={{ height: 0, opacity: 0 }}
-                                    animate={{ height: 'auto', opacity: 1 }}
-                                >
-                                    <input
-                                        type="password"
-                                        value={githubToken}
-                                        onChange={(e) => setGithubToken(e.target.value)}
-                                        placeholder="GitHub personal access token"
-                                        className="input token-input"
-                                    />
-                                    <a href="https://github.com/settings/tokens" target="_blank" rel="noopener noreferrer" className="token-link">
-                                        Get token →
-                                    </a>
-                                </motion.div>
-                            )}
-                        </div>
-
-                        {error && <div className="error-msg"><AlertCircle size={16} />{error}</div>}
+                        <motion.button
+                            className="btn btn-primary btn-lg full-width"
+                            onClick={() => setShowConnectModal(true)}
+                            whileTap={{ scale: 0.98 }}
+                        >
+                            Link GitHub Account
+                        </motion.button>
                     </div>
                 </motion.div>
+
+                <ConnectModal
+                    isOpen={showConnectModal}
+                    onClose={() => setShowConnectModal(false)}
+                />
             </div>
         );
     }
