@@ -26,6 +26,7 @@ function GitHub() {
     const [tone, setTone] = useState('professional');
     const [repoSearch, setRepoSearch] = useState('');
     const [showRepoSelector, setShowRepoSelector] = useState(false);
+    const [showConnectModal, setShowConnectModal] = useState(false);
     const [githubToken, setGithubToken] = useState('');
     const [showToken, setShowToken] = useState(false);
 
