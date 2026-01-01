@@ -3,9 +3,10 @@
 const GITHUB_API_BASE = 'https://api.github.com';
 
 // Fetch user profile
-export const fetchUserProfile = async (username) => {
+export const fetchUserProfile = async (username, token = null) => {
   try {
-    const response = await fetch(`${GITHUB_API_BASE}/users/${username}`);
+    const headers = token ? { Authorization: `token ${token}` } : {};
+    const response = await fetch(`${GITHUB_API_BASE}/users/${username}`, { headers });
     if (!response.ok) {
       throw new Error('User not found');
     }
@@ -16,12 +17,16 @@ export const fetchUserProfile = async (username) => {
   }
 };
 
-// Fetch user repositories
-export const fetchUserRepos = async (username, page = 1, perPage = 30) => {
+// Fetch user repositories (uses /user/repos for authenticated user to get private repos)
+export const fetchUserRepos = async (username, token = null, page = 1, perPage = 100) => {
   try {
-    const response = await fetch(
-      `${GITHUB_API_BASE}/users/${username}/repos?sort=updated&per_page=${perPage}&page=${page}`
-    );
+    const headers = token ? { Authorization: `token ${token}` } : {};
+    // Use /user/repos endpoint for authenticated requests to get ALL repos including private
+    const endpoint = token 
+      ? `${GITHUB_API_BASE}/user/repos?sort=updated&per_page=${perPage}&page=${page}&visibility=all`
+      : `${GITHUB_API_BASE}/users/${username}/repos?sort=updated&per_page=${perPage}&page=${page}`;
+    
+    const response = await fetch(endpoint, { headers });
     if (!response.ok) {
       throw new Error('Failed to fetch repositories');
     }
@@ -49,11 +54,15 @@ export const fetchRepoCommits = async (username, repo, perPage = 10) => {
 };
 
 // Fetch user's recent events (activity)
-export const fetchUserEvents = async (username, perPage = 30) => {
+export const fetchUserEvents = async (username, token = null, perPage = 30) => {
   try {
-    const response = await fetch(
-      `${GITHUB_API_BASE}/users/${username}/events/public?per_page=${perPage}`
-    );
+    const headers = token ? { Authorization: `token ${token}` } : {};
+    // Use /events (not /events/public) when authenticated to include private activity
+    const endpoint = token
+      ? `${GITHUB_API_BASE}/users/${username}/events?per_page=${perPage}`
+      : `${GITHUB_API_BASE}/users/${username}/events/public?per_page=${perPage}`;
+    
+    const response = await fetch(endpoint, { headers });
     if (!response.ok) {
       throw new Error('Failed to fetch events');
     }
@@ -65,9 +74,9 @@ export const fetchUserEvents = async (username, perPage = 30) => {
 };
 
 // Get activity summary for the past week
-export const getWeeklyActivitySummary = async (username) => {
+export const getWeeklyActivitySummary = async (username, token = null) => {
   try {
-    const events = await fetchUserEvents(username, 100);
+    const events = await fetchUserEvents(username, token, 100);
     const oneWeekAgo = new Date();
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
