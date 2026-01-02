@@ -7,7 +7,13 @@ export default async function handler(req, res) {
 
     const CLIENT_ID = process.env.VITE_LINKEDIN_CLIENT_ID;
     const CLIENT_SECRET = process.env.LINKEDIN_CLIENT_SECRET;
-    const REDIRECT_URI = `${process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : 'http://localhost:3000'}/api/linkedin/callback`;
+    
+    // Get the actual host from the request headers to ensure URI consistency
+    const protocol = req.headers['x-forwarded-proto'] || 'https';
+    const host = req.headers.host;
+    const REDIRECT_URI = `${protocol}://${host}/api/linkedin/callback`;
+
+    console.log('LinkedIn OAuth callback - Redirect URI:', REDIRECT_URI);
 
     try {
         // Exchange code for access token
