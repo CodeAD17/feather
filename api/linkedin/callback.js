@@ -2,7 +2,7 @@ export default async function handler(req, res) {
     const { code } = req.query;
 
     if (!code) {
-        return res.redirect('/github?error=No authorization code provided');
+        return res.redirect('/linkedin?error=No authorization code provided');
     }
 
     const CLIENT_ID = process.env.VITE_LINKEDIN_CLIENT_ID;
@@ -29,7 +29,7 @@ export default async function handler(req, res) {
 
         if (tokenData.error) {
             console.error('LinkedIn Auth Error:', tokenData.error, tokenData.error_description);
-            return res.redirect(`/github?error=${encodeURIComponent(tokenData.error_description || tokenData.error)}`);
+            return res.redirect(`/linkedin?error=${encodeURIComponent(tokenData.error_description || tokenData.error)}`);
         }
 
         const accessToken = tokenData.access_token;
@@ -43,7 +43,7 @@ export default async function handler(req, res) {
 
         const userData = await userResponse.json();
 
-        // Redirect back to frontend with token and user info
+        // Redirect back to LinkedIn page with token and user info
         const params = new URLSearchParams({
             linkedin_token: accessToken,
             linkedin_name: userData.name || '',
@@ -51,9 +51,9 @@ export default async function handler(req, res) {
             linkedin_picture: userData.picture || '',
         });
 
-        return res.redirect(`/github?${params.toString()}`);
+        return res.redirect(`/linkedin?${params.toString()}`);
     } catch (error) {
         console.error('LinkedIn OAuth Error:', error.message);
-        return res.redirect(`/github?error=${encodeURIComponent(error.message)}`);
+        return res.redirect(`/linkedin?error=${encodeURIComponent(error.message)}`);
     }
 }

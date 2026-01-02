@@ -6,7 +6,7 @@ import RepoSelector from '../components/RepoSelector';
 import ConnectModal from '../components/ConnectModal';
 import { fetchUserProfile, fetchUserRepos, getWeeklyActivitySummary, formatRepoData } from '../utils/github';
 import { generateGitHubPost } from '../utils/ai';
-import { saveDraft, getSettings, saveSettings, getGitHubData, saveGitHubData } from '../utils/storage';
+import { saveDraft, getSettings, saveSettings, getGitHubData, saveGitHubData, clearGitHubData } from '../utils/storage';
 import { useNavigate } from 'react-router-dom';
 import './GitHub.css';
 
@@ -149,10 +149,13 @@ function GitHub() {
     };
 
     const handleDisconnect = () => {
+        clearGitHubData(); // Clear storage so it persists after reload
         setProfile(null);
         setRepos([]);
         setSelectedRepos([]);
         setGeneratedPost('');
+        setUsername('');
+        setGithubToken('');
     };
 
     // Not connected

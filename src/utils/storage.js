@@ -124,6 +124,24 @@ export const saveGitHubData = (data) => {
   }
 };
 
+// Clear GitHub data
+export const clearGitHubData = () => {
+  try {
+    localStorage.removeItem(STORAGE_KEYS.GITHUB_DATA);
+    // Also clear GitHub-related settings
+    const settings = getSettings();
+    saveSettings({ 
+      ...settings,
+      githubUsername: '',
+      githubToken: '' 
+    });
+    return true;
+  } catch (error) {
+    console.error('Error clearing GitHub data:', error);
+    return false;
+  }
+};
+
 // Export all data
 export const exportData = () => {
   return {
