@@ -1,0 +1,183 @@
+.linkedin-page {
+    padding: var(--space-6);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.linkedin-profile-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-5);
+    margin-bottom: var(--space-6);
+}
+
+.profile-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.profile-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-avatar-placeholder {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--bg-hover);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-info h2 {
+    margin: 0;
+    font-size: var(--text-xl);
+}
+
+.connection-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    margin-top: 4px;
+}
+
+.connection-status.connected {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+}
+
+.connect-prompt {
+    text-align: center;
+    padding: var(--space-6) var(--space-4);
+}
+
+.connect-prompt .connect-icon {
+    color: #0A66C2;
+    margin-bottom: var(--space-4);
+}
+
+.connect-prompt h2 {
+    margin: 0 0 var(--space-2);
+}
+
+.connect-prompt p {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-4);
+}
+
+/* Queue Section */
+.queue-section {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-5);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-4);
+}
+
+.section-header h3 {
+    margin: 0;
+}
+
+.queue-count {
+    font-size: 13px;
+    color: var(--text-muted);
+    background: var(--bg-hover);
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+}
+
+.empty-queue {
+    text-align: center;
+    padding: var(--space-8);
+    color: var(--text-secondary);
+}
+
+.drafts-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.draft-card {
+    display: flex;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    background: var(--bg-base);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+}
+
+.draft-content {
+    flex: 1;
+}
+
+.draft-content p {
+    margin: 0 0 var(--space-2);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.draft-meta {
+    display: flex;
+    gap: var(--space-3);
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.draft-source {
+    text-transform: capitalize;
+}
+
+.draft-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+    .linkedin-page {
+        padding: var(--space-4);
+    }
+
+    .profile-row {
+        flex-wrap: wrap;
+    }
+
+    .profile-info {
+        flex: 1 1 calc(100% - 80px);
+    }
+
+    .profile-row .btn {
+        width: 100%;
+        margin-top: var(--space-3);
+    }
+
+    .draft-card {
+        flex-direction: column;
+    }
+
+    .draft-actions {
+        flex-direction: row;
+    }
+}

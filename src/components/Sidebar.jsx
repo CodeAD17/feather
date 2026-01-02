@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Home, PenSquare, Github, FileText, Settings, MoreHorizontal } from 'lucide-react';
+import { Home, PenSquare, Github, Linkedin, FileText, Settings, MoreHorizontal } from 'lucide-react';
 import { getGitHubData } from '../utils/storage';
 import './Sidebar.css';
 
@@ -8,6 +8,7 @@ const navItems = [
     { path: '/', icon: Home, label: 'Home' },
     { path: '/upload', icon: PenSquare, label: 'Create' },
     { path: '/github', icon: Github, label: 'GitHub' },
+    { path: '/linkedin', icon: Linkedin, label: 'LinkedIn' },
     { path: '/queue', icon: FileText, label: 'Queue' },
     { path: '/settings', icon: Settings, label: 'Settings' },
 ];

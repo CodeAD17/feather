@@ -7,6 +7,7 @@ import PageLoader from './components/PageLoader';
 import Dashboard from './pages/Dashboard';
 import Upload from './pages/Upload';
 import GitHub from './pages/GitHub';
+import LinkedIn from './pages/LinkedIn';
 import Queue from './pages/Queue';
 import Settings from './pages/Settings';
 import Login from './pages/Login';
@@ -171,6 +172,7 @@ function App() {
                   <Route path="/" element={<Dashboard />} />
                   <Route path="/upload" element={<Upload />} />
                   <Route path="/github" element={<GitHub />} />
+                  <Route path="/linkedin" element={<LinkedIn />} />
                   <Route path="/queue" element={<Queue />} />
                   <Route path="/settings" element={<Settings />} />
                   {/* Redirect any unknown route to home (or 404) */}

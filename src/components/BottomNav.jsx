@@ -1,10 +1,11 @@
 import { NavLink } from 'react-router-dom';
-import { Home, Github, FileText, Settings } from 'lucide-react';
+import { Home, Github, Linkedin, FileText, Settings } from 'lucide-react';
 import './BottomNav.css';
 
 const navItems = [
     { path: '/', icon: Home, label: 'Home' },
     { path: '/github', icon: Github, label: 'GitHub' },
+    { path: '/linkedin', icon: Linkedin, label: 'LinkedIn' },
     { path: '/queue', icon: FileText, label: 'Queue' },
     { path: '/settings', icon: Settings, label: 'Settings' },
 ];
