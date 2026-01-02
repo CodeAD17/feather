@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Github, Loader2, Sparkles, Copy, Check, AlertCircle, Users, BookOpen, Wand2, Send, Search, Lock } from 'lucide-react';
+import { Github, Loader2, Sparkles, Copy, Check, AlertCircle, Users, BookOpen, Wand2, Send, Search, Lock, Linkedin } from 'lucide-react';
 import GitHubCard from '../components/GitHubCard';
 import RepoSelector from '../components/RepoSelector';
 import ConnectModal from '../components/ConnectModal';
@@ -30,10 +30,21 @@ function GitHub() {
     const [githubToken, setGithubToken] = useState('');
     const [showToken, setShowToken] = useState(false);
 
+    // LinkedIn connection state
+    const [linkedinToken, setLinkedinToken] = useState('');
+    const [linkedinUser, setLinkedinUser] = useState(null);
+    const [posting, setPosting] = useState(false);
+
     useEffect(() => {
         // Check for token in URL query params (from OAuth redirect)
         const searchParams = new URLSearchParams(window.location.search);
         const tokenFromUrl = searchParams.get('token');
+
+        // Check for LinkedIn token from OAuth redirect
+        const linkedinTokenFromUrl = searchParams.get('linkedin_token');
+        const linkedinName = searchParams.get('linkedin_name');
+        const linkedinSub = searchParams.get('linkedin_sub');
+        const linkedinPicture = searchParams.get('linkedin_picture');
 
         if (tokenFromUrl) {
             handleConnect(null, tokenFromUrl); // Pass token, username will be fetched
@@ -41,9 +52,28 @@ function GitHub() {
             window.history.replaceState({}, document.title, window.location.pathname);
         }
 
+        if (linkedinTokenFromUrl) {
+            setLinkedinToken(linkedinTokenFromUrl);
+            setLinkedinUser({
+                name: linkedinName,
+                sub: linkedinSub,
+                picture: linkedinPicture,
+            });
+            // Save to settings
+            saveSettings({
+                linkedinToken: linkedinTokenFromUrl,
+                linkedinUser: { name: linkedinName, sub: linkedinSub, picture: linkedinPicture }
+            });
+            // Clean URL
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+
         const settings = getSettings();
         if (settings.githubUsername) setUsername(settings.githubUsername);
         if (settings.githubToken) setGithubToken(settings.githubToken);
+        if (settings.linkedinToken) setLinkedinToken(settings.linkedinToken);
+        if (settings.linkedinUser) setLinkedinUser(settings.linkedinUser);
+
         const cached = getGitHubData();
         if (cached) {
             setProfile(cached.profile);
@@ -295,6 +325,53 @@ function GitHub() {
                         <button className="btn btn-secondary" onClick={handleGenerate} disabled={generating}>
                             <Sparkles size={16} /> Regenerate
                         </button>
+
+                        {linkedinToken && linkedinUser ? (
+                            <motion.button
+                                className="btn btn-linkedin btn-lg"
+                                onClick={async () => {
+                                    setPosting(true);
+                                    try {
+                                        const response = await fetch('/api/linkedin/post', {
+                                            method: 'POST',
+                                            headers: { 'Content-Type': 'application/json' },
+                                            body: JSON.stringify({
+                                                text: generatedPost,
+                                                token: linkedinToken,
+                                                authorId: linkedinUser.sub,
+                                            }),
+                                        });
+                                        const result = await response.json();
+                                        if (result.success) {
+                                            alert('🎉 Posted to LinkedIn successfully!');
+                                        } else {
+                                            alert('Failed: ' + (result.error || 'Unknown error'));
+                                        }
+                                    } catch (err) {
+                                        alert('Error posting: ' + err.message);
+                                    } finally {
+                                        setPosting(false);
+                                    }
+                                }}
+                                disabled={posting}
+                                whileTap={{ scale: 0.98 }}
+                            >
+                                {posting ? (
+                                    <><Loader2 size={18} className="spinning" /> Posting...</>
+                                ) : (
+                                    <><Linkedin size={18} /> Post to LinkedIn</>
+                                )}
+                            </motion.button>
+                        ) : (
+                            <motion.button
+                                className="btn btn-linkedin btn-lg"
+                                onClick={() => setShowConnectModal(true)}
+                                whileTap={{ scale: 0.98 }}
+                            >
+                                <Linkedin size={18} /> Connect LinkedIn to Post
+                            </motion.button>
+                        )}
+
                         <motion.button className="btn btn-success btn-lg" onClick={handleSave} whileTap={{ scale: 0.98 }}>
                             <Send size={18} /> Save to Queue
                         </motion.button>

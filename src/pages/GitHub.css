@@ -351,7 +351,20 @@
 .result-actions {
     display: flex;
     gap: var(--space-3);
+    flex-wrap: wrap;
     margin-top: var(--space-4);
+}
+
+.btn-linkedin {
+    background: #0A66C2;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.btn-linkedin:hover {
+    background: #004182;
 }
 
 .result-actions .btn-lg {
