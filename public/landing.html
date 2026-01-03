@@ -597,6 +597,464 @@
         </div>
     </section>
 
+    <!-- Workflow Visualization (n8n style) -->
+    <section class="workflow-section" id="workflow">
+        <div class="workflow-header">
+            <span class="tag mono" style="color: var(--accent); border-color: rgba(59, 130, 246, 0.3);">//
+                HOW_IT_WORKS</span>
+            <h2 class="text-texture" style="margin-bottom: 24px;">THE PIPELINE</h2>
+            <p style="color: #71717a; font-size: 18px; max-width: 600px; margin: 0 auto;">
+                Your code becomes content through our AI-powered workflow. Zero effort required.
+            </p>
+        </div>
+
+        <div class="workflow-canvas">
+            <!-- Node 1: GitHub -->
+            <div class="workflow-node node-github" data-step="1">
+                <div class="node-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
+                        <path
+                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                    </svg>
+                </div>
+                <div class="node-content">
+                    <div class="node-title">GITHUB</div>
+                    <div class="node-desc">Connect & Sync</div>
+                </div>
+                <div class="node-status">
+                    <div class="status-dot active"></div>
+                </div>
+            </div>
+
+            <!-- Connection Line 1 -->
+            <div class="workflow-connector connector-1">
+                <svg viewBox="0 0 100 20" preserveAspectRatio="none">
+                    <path d="M0,10 L100,10" class="connector-path" />
+                </svg>
+                <div class="data-pulse pulse-1"></div>
+            </div>
+
+            <!-- Node 2: Analyze -->
+            <div class="workflow-node node-analyze" data-step="2">
+                <div class="node-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="M21 21l-4.35-4.35" />
+                        <path d="M11 8v6M8 11h6" />
+                    </svg>
+                </div>
+                <div class="node-content">
+                    <div class="node-title">ANALYZE</div>
+                    <div class="node-desc">Parse Commits</div>
+                </div>
+                <div class="node-status">
+                    <div class="status-dot processing"></div>
+                </div>
+            </div>
+
+            <!-- Connection Line 2 -->
+            <div class="workflow-connector connector-2">
+                <svg viewBox="0 0 100 20" preserveAspectRatio="none">
+                    <path d="M0,10 L100,10" class="connector-path" />
+                </svg>
+                <div class="data-pulse pulse-2"></div>
+            </div>
+
+            <!-- Node 3: AI Generate -->
+            <div class="workflow-node node-ai" data-step="3">
+                <div class="node-icon icon-ai">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                        <path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
+                    </svg>
+                </div>
+                <div class="node-content">
+                    <div class="node-title">AI ENGINE</div>
+                    <div class="node-desc">Generate Post</div>
+                </div>
+                <div class="node-status">
+                    <div class="status-dot ai-active"></div>
+                </div>
+            </div>
+
+            <!-- Connection Line 3 -->
+            <div class="workflow-connector connector-3">
+                <svg viewBox="0 0 100 20" preserveAspectRatio="none">
+                    <path d="M0,10 L100,10" class="connector-path" />
+                </svg>
+                <div class="data-pulse pulse-3"></div>
+            </div>
+
+            <!-- Node 4: LinkedIn -->
+            <div class="workflow-node node-linkedin" data-step="4">
+                <div class="node-icon icon-linkedin">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
+                        <path
+                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                    </svg>
+                </div>
+                <div class="node-content">
+                    <div class="node-title">LINKEDIN</div>
+                    <div class="node-desc">Auto Post</div>
+                </div>
+                <div class="node-status">
+                    <div class="status-dot success"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Workflow Details -->
+        <div class="workflow-details">
+            <div class="detail-card">
+                <div class="detail-number">01</div>
+                <div class="detail-text">
+                    <strong>Connect GitHub</strong>
+                    <span>OAuth with full repo access</span>
+                </div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-number">02</div>
+                <div class="detail-text">
+                    <strong>Select Repos</strong>
+                    <span>Pick projects to highlight</span>
+                </div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-number">03</div>
+                <div class="detail-text">
+                    <strong>AI Writes</strong>
+                    <span>Groq generates authentic posts</span>
+                </div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-number">04</div>
+                <div class="detail-text">
+                    <strong>One-Click Post</strong>
+                    <span>Publish directly to LinkedIn</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* Workflow Section Styles */
+        .workflow-section {
+            padding: 120px 40px;
+            border-bottom: 1px solid var(--grid);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .workflow-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .workflow-header h2 {
+            font-size: clamp(40px, 6vw, 80px);
+        }
+
+        .workflow-canvas {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            padding: 40px 20px;
+            position: relative;
+            flex-wrap: wrap;
+        }
+
+        /* Workflow Nodes */
+        .workflow-node {
+            background: var(--surface);
+            border: 1px solid var(--grid);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            min-width: 140px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: nodeEntrance 0.8s ease-out both;
+        }
+
+        .workflow-node:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .workflow-node:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .workflow-node:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .workflow-node:nth-child(7) {
+            animation-delay: 0.7s;
+        }
+
+        @keyframes nodeEntrance {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .workflow-node:hover {
+            transform: translateY(-8px) scale(1.05);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px -10px rgba(59, 130, 246, 0.3);
+        }
+
+        .node-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--fg);
+        }
+
+        .node-github .node-icon {
+            color: #fff;
+        }
+
+        .node-analyze .node-icon {
+            color: #f59e0b;
+        }
+
+        .node-ai .node-icon {
+            color: var(--accent);
+            animation: aiGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes aiGlow {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.5));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.8));
+            }
+        }
+
+        .node-linkedin .node-icon {
+            color: #0A66C2;
+        }
+
+        .node-content {
+            text-align: center;
+        }
+
+        .node-title {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 0.05em;
+            color: var(--fg);
+        }
+
+        .node-desc {
+            font-size: 11px;
+            color: #71717a;
+            margin-top: 4px;
+        }
+
+        .node-status {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: statusPulse 2s ease-in-out infinite;
+        }
+
+        .status-dot.active {
+            background: var(--success);
+        }
+
+        .status-dot.processing {
+            background: #f59e0b;
+        }
+
+        .status-dot.ai-active {
+            background: var(--accent);
+        }
+
+        .status-dot.success {
+            background: #0A66C2;
+        }
+
+        @keyframes statusPulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(1.3);
+            }
+        }
+
+        /* Connectors */
+        .workflow-connector {
+            width: 80px;
+            height: 20px;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .workflow-connector svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .connector-path {
+            stroke: var(--grid);
+            stroke-width: 2;
+            stroke-dasharray: 8, 4;
+            fill: none;
+            animation: dashFlow 1s linear infinite;
+        }
+
+        @keyframes dashFlow {
+            to {
+                stroke-dashoffset: -12;
+            }
+        }
+
+        .data-pulse {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulseMove 3s ease-in-out infinite;
+            box-shadow: 0 0 12px var(--accent);
+        }
+
+        .pulse-1 {
+            animation-delay: 0s;
+        }
+
+        .pulse-2 {
+            animation-delay: 0.5s;
+        }
+
+        .pulse-3 {
+            animation-delay: 1s;
+        }
+
+        @keyframes pulseMove {
+            0% {
+                left: 0%;
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                left: 100%;
+                opacity: 0;
+            }
+        }
+
+        /* Workflow Details */
+        .workflow-details {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--grid);
+            margin-top: 60px;
+            border: 1px solid var(--grid);
+        }
+
+        .detail-card {
+            background: var(--bg);
+            padding: 32px 24px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .detail-number {
+            font-family: var(--font-mono);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent);
+            opacity: 0.5;
+        }
+
+        .detail-text {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .detail-text strong {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .detail-text span {
+            font-size: 13px;
+            color: #71717a;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 900px) {
+            .workflow-canvas {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .workflow-connector {
+                width: 20px;
+                height: 40px;
+                transform: rotate(90deg);
+            }
+
+            .workflow-details {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .workflow-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
     <!-- Massive CTA -->
     <section style="padding: 120px 40px; text-align: center;">
         <h2 style="font-size: clamp(50px, 10vw, 120px); margin-bottom: 20px;">
