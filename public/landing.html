@@ -1936,6 +1936,308 @@
             ©2025
         </div>
     </footer>
+
+    <!-- Mobile Phone Optimizations -->
+    <style>
+        /* Phone Screen Optimizations (max-width: 600px) */
+        @media (max-width: 600px) {
+
+            /* Global Mobile Adjustments */
+            body {
+                border-left: none;
+                border-right: none;
+            }
+
+            /* Header */
+            header {
+                padding: 16px 20px;
+            }
+
+            header nav {
+                gap: 16px !important;
+            }
+
+            header nav a[href="#value"] {
+                display: none;
+            }
+
+            .logo {
+                font-size: 18px;
+                gap: 8px;
+            }
+
+            .logo img {
+                height: 28px;
+            }
+
+            /* Hero Mobile */
+            .hero {
+                padding: 40px 20px;
+                padding-top: 100px;
+                min-height: auto;
+            }
+
+            .hero h1 {
+                font-size: clamp(40px, 12vw, 60px);
+                margin-bottom: 20px;
+            }
+
+            .hero-desc {
+                font-size: 16px;
+                margin-bottom: 32px;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .hero-actions .btn {
+                width: 100%;
+                padding: 18px 24px;
+                font-size: 14px;
+            }
+
+            .hero-stats {
+                flex-wrap: wrap;
+                gap: 16px;
+                margin-top: 40px;
+                padding-top: 24px;
+                justify-content: center;
+            }
+
+            .stat-value {
+                font-size: 22px;
+            }
+
+            .stat-label {
+                font-size: 10px;
+            }
+
+            .stat-divider {
+                display: none;
+            }
+
+            /* Marquee */
+            .marquee {
+                font-size: 16px;
+                padding: 12px 0;
+            }
+
+            /* Split Section */
+            .split-content {
+                padding: 60px 20px;
+            }
+
+            .split-content h2 {
+                font-size: clamp(28px, 8vw, 40px);
+                margin-bottom: 24px;
+            }
+
+            .check-list li {
+                font-size: 16px;
+                padding: 14px 0;
+            }
+
+            /* Bento Grid */
+            .bento-item {
+                padding: 40px 20px;
+            }
+
+            .bento-item h3 {
+                font-size: 24px;
+            }
+
+            .bento-item p {
+                font-size: 14px;
+            }
+
+            /* UI Showcase */
+            .ui-showcase {
+                padding: 80px 20px;
+            }
+
+            .showcase-header h2 {
+                font-size: clamp(32px, 10vw, 50px);
+            }
+
+            .showcase-header p {
+                font-size: 14px;
+            }
+
+            .showcase-container {
+                min-height: auto;
+            }
+
+            .desktop-frame {
+                width: 100%;
+            }
+
+            .mobile-frame {
+                width: 160px;
+                margin-top: 24px;
+            }
+
+            .feature-pills {
+                margin-top: 60px;
+                gap: 10px;
+            }
+
+            .pill {
+                padding: 10px 16px;
+                font-size: 12px;
+            }
+
+            /* Workflow */
+            .workflow-section {
+                padding: 80px 20px;
+            }
+
+            .workflow-header h2 {
+                font-size: clamp(32px, 10vw, 50px);
+            }
+
+            .workflow-header p {
+                font-size: 14px;
+            }
+
+            .workflow-node {
+                padding: 16px;
+                min-width: 120px;
+            }
+
+            .node-icon {
+                width: 48px;
+                height: 48px;
+            }
+
+            .node-icon svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .node-title {
+                font-size: 10px;
+            }
+
+            .node-desc {
+                font-size: 9px;
+            }
+
+            .workflow-connector {
+                width: 16px;
+                height: 30px;
+            }
+
+            .workflow-details {
+                margin-top: 40px;
+            }
+
+            .detail-card {
+                padding: 20px 16px;
+            }
+
+            .detail-number {
+                font-size: 18px;
+            }
+
+            .detail-text strong {
+                font-size: 12px;
+            }
+
+            .detail-text span {
+                font-size: 11px;
+            }
+
+            /* CTA Section */
+            section[style*="padding: 120px"] {
+                padding: 80px 20px !important;
+            }
+
+            section[style*="padding: 120px"] h2 {
+                font-size: clamp(40px, 12vw, 80px) !important;
+            }
+
+            section[style*="padding: 120px"] .btn {
+                font-size: 16px !important;
+                padding: 20px 40px !important;
+                width: 100%;
+            }
+
+            /* Footer */
+            footer {
+                padding: 60px 20px;
+                flex-direction: column;
+                gap: 24px;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-logo {
+                font-size: 48px;
+            }
+
+            footer .mono {
+                text-align: center !important;
+            }
+        }
+
+        /* Extra Small Phones (max-width: 380px) */
+        @media (max-width: 380px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero-desc {
+                font-size: 14px;
+            }
+
+            .stat {
+                flex: 1;
+                text-align: center;
+            }
+
+            .workflow-node {
+                min-width: 100px;
+                padding: 12px;
+            }
+
+            .node-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .workflow-connector {
+                width: 12px;
+            }
+        }
+
+        /* Touch Device Improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .btn:active {
+                transform: scale(0.98);
+            }
+
+            .workflow-node:active {
+                transform: scale(0.95);
+            }
+
+            .pill:active {
+                transform: scale(0.95);
+            }
+        }
+
+        /* Safe Area for Notched Phones */
+        @supports (padding-top: env(safe-area-inset-top)) {
+            header {
+                padding-top: max(16px, env(safe-area-inset-top));
+            }
+
+            footer {
+                padding-bottom: max(60px, env(safe-area-inset-bottom));
+            }
+        }
+    </style>
 </body>
 
 </html>
