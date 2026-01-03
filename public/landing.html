@@ -597,6 +597,342 @@
         </div>
     </section>
 
+    <!-- UI Showcase Section -->
+    <section class="ui-showcase" id="preview">
+        <div class="showcase-header">
+            <span class="tag mono" style="color: var(--success); border-color: rgba(16, 185, 129, 0.3);">//
+                INTERFACE</span>
+            <h2 class="text-texture" style="margin-bottom: 24px;">BUILT FOR<br><span
+                    class="text-texture-accent">BUILDERS</span></h2>
+            <p style="color: #71717a; font-size: 18px; max-width: 500px; margin: 0 auto;">
+                A minimal, brutalist dashboard that gets out of your way. Desktop & mobile.
+            </p>
+        </div>
+
+        <div class="showcase-container">
+            <!-- Desktop Frame -->
+            <div class="device-frame desktop-frame">
+                <div class="device-header">
+                    <div class="device-dots">
+                        <span class="d-dot red"></span>
+                        <span class="d-dot yellow"></span>
+                        <span class="d-dot green"></span>
+                    </div>
+                    <div class="device-url">
+                        <span class="mono">feather-orcin.vercel.app</span>
+                    </div>
+                </div>
+                <div class="device-screen">
+                    <img src="/app-desktop.png" alt="Feather Desktop Dashboard" loading="lazy">
+                </div>
+                <div class="device-label">DESKTOP</div>
+            </div>
+
+            <!-- Mobile Frame -->
+            <div class="device-frame mobile-frame">
+                <div class="device-notch"></div>
+                <div class="device-screen">
+                    <img src="/app-mobile.png" alt="Feather Mobile View" loading="lazy">
+                </div>
+                <div class="device-label">MOBILE</div>
+            </div>
+
+            <!-- Floating Elements -->
+            <div class="floating-badge badge-1">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+                </svg>
+                <span>Auto-sync</span>
+            </div>
+            <div class="floating-badge badge-2">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                    <path
+                        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <span>AI Powered</span>
+            </div>
+        </div>
+
+        <!-- Feature Pills -->
+        <div class="feature-pills">
+            <div class="pill"><span class="pill-icon">⚡</span> Instant Generation</div>
+            <div class="pill"><span class="pill-icon">🎯</span> Tone Control</div>
+            <div class="pill"><span class="pill-icon">📱</span> Fully Responsive</div>
+            <div class="pill"><span class="pill-icon">🔒</span> OAuth Secure</div>
+        </div>
+    </section>
+
+    <style>
+        /* UI Showcase Styles */
+        .ui-showcase {
+            padding: 120px 40px;
+            border-bottom: 1px solid var(--grid);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .showcase-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .showcase-header h2 {
+            font-size: clamp(40px, 6vw, 80px);
+            line-height: 1;
+        }
+
+        .showcase-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            min-height: 600px;
+            perspective: 2000px;
+        }
+
+        /* Device Frames */
+        .device-frame {
+            background: #0a0a0c;
+            border: 1px solid var(--grid);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow:
+                0 50px 100px -20px rgba(0, 0, 0, 0.5),
+                0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .desktop-frame {
+            width: min(800px, 65%);
+            transform: rotateY(-5deg) rotateX(2deg);
+            transform-style: preserve-3d;
+            animation: desktopFloat 6s ease-in-out infinite;
+        }
+
+        .desktop-frame:hover {
+            transform: rotateY(0deg) rotateX(0deg) scale(1.02);
+            box-shadow:
+                0 60px 120px -20px rgba(59, 130, 246, 0.3),
+                0 0 1px rgba(59, 130, 246, 0.5);
+        }
+
+        @keyframes desktopFloat {
+
+            0%,
+            100% {
+                transform: rotateY(-5deg) rotateX(2deg) translateY(0);
+            }
+
+            50% {
+                transform: rotateY(-5deg) rotateX(2deg) translateY(-10px);
+            }
+        }
+
+        .mobile-frame {
+            width: 240px;
+            border-radius: 32px;
+            position: absolute;
+            right: 8%;
+            bottom: -40px;
+            transform: rotateY(10deg) rotateX(-5deg);
+            animation: mobileFloat 5s ease-in-out infinite 0.5s;
+            z-index: 10;
+        }
+
+        .mobile-frame:hover {
+            transform: rotateY(0deg) rotateX(0deg) scale(1.05) translateY(-10px);
+        }
+
+        @keyframes mobileFloat {
+
+            0%,
+            100% {
+                transform: rotateY(10deg) rotateX(-5deg) translateY(0);
+            }
+
+            50% {
+                transform: rotateY(10deg) rotateX(-5deg) translateY(-15px);
+            }
+        }
+
+        .device-header {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--grid);
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .device-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .d-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .d-dot.red {
+            background: #ef4444;
+            opacity: 0.6;
+        }
+
+        .d-dot.yellow {
+            background: #eab308;
+            opacity: 0.6;
+        }
+
+        .d-dot.green {
+            background: #22c55e;
+            opacity: 0.6;
+        }
+
+        .device-url {
+            flex: 1;
+            text-align: center;
+            font-size: 12px;
+            color: #52525b;
+        }
+
+        .device-notch {
+            width: 100px;
+            height: 24px;
+            background: #0a0a0c;
+            border-radius: 0 0 16px 16px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 5;
+        }
+
+        .device-screen {
+            overflow: hidden;
+        }
+
+        .device-screen img {
+            width: 100%;
+            display: block;
+        }
+
+        .device-label {
+            position: absolute;
+            bottom: -32px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            color: #3f3f46;
+        }
+
+        /* Floating Badges */
+        .floating-badge {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: var(--surface);
+            border: 1px solid var(--grid);
+            border-radius: 50px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--fg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: badgeFloat 4s ease-in-out infinite;
+        }
+
+        .badge-1 {
+            top: 15%;
+            left: 5%;
+            color: var(--success);
+            animation-delay: 0s;
+        }
+
+        .badge-2 {
+            bottom: 25%;
+            left: 2%;
+            color: var(--accent);
+            animation-delay: 1s;
+        }
+
+        @keyframes badgeFloat {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(-2deg);
+            }
+
+            50% {
+                transform: translateY(-12px) rotate(2deg);
+            }
+        }
+
+        /* Feature Pills */
+        .feature-pills {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 100px;
+        }
+
+        .pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--surface);
+            border: 1px solid var(--grid);
+            border-radius: 50px;
+            font-size: 14px;
+            color: #a1a1aa;
+            transition: all 0.3s ease;
+        }
+
+        .pill:hover {
+            border-color: var(--accent);
+            color: var(--fg);
+            transform: translateY(-2px);
+        }
+
+        .pill-icon {
+            font-size: 16px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 900px) {
+            .showcase-container {
+                flex-direction: column;
+                align-items: center;
+                min-height: auto;
+            }
+
+            .desktop-frame {
+                width: 100%;
+                transform: none;
+                animation: none;
+            }
+
+            .mobile-frame {
+                position: relative;
+                right: auto;
+                bottom: auto;
+                width: 200px;
+                transform: none;
+                animation: none;
+                margin-top: 40px;
+            }
+
+            .floating-badge {
+                display: none;
+            }
+        }
+    </style>
+
     <!-- Workflow Visualization (n8n style) -->
     <section class="workflow-section" id="workflow">
         <div class="workflow-header">
