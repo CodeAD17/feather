@@ -28,17 +28,19 @@ Details:
 - Skills Learned: ${skills}
 - Additional Context: ${context}
 
-Guidelines:
+FORMATTING RULES:
 - ${toneInstructions[tone]}
+- DO NOT use markdown like **bold** or *italics* - LinkedIn doesn't render these
+- For emphasis, use UPPERCASE for key words
 - Keep it concise (150-250 words max)
 - Focus on learning and growth, not bragging
 - Be authentic and humble
 - Include 2-3 relevant hashtags at the end
 - Don't use clichés like "excited to announce" or "thrilled to share"
-- Don't use excessive emojis (1-2 max, if any)
+- Use 1-2 emojis max for visual interest
 - End with a question or call-to-action to encourage engagement
 
-Write the LinkedIn post now:`;
+Write the LinkedIn post now (NO markdown formatting):`;
 
   return await callGroqAPI(prompt, settings.groqApiKey);
 };
@@ -56,7 +58,7 @@ export const generateGitHubPost = async (data) => {
   const toneInstructions = {
     professional: 'Write in a professional, articulate tone focusing on technical achievements.',
     casual: 'Write in a friendly, developer-to-developer tone. Be relatable.',
-    storytelling: 'Write as a brief story about your coding journey this week.',
+    enthusiastic: 'Write with energy and enthusiasm about the progress made.',
   };
 
   const repoDetails = selectedRepos
@@ -83,17 +85,21 @@ ${commitSummary}
 
 Focus Area: ${focus || 'General development progress'}
 
-Guidelines:
+IMPORTANT FORMATTING RULES:
 - ${toneInstructions[tone]}
-- Create a "building in public" style post
+- DO NOT use markdown syntax like **bold** or *italics* - LinkedIn does not render these
+- For emphasis, use UPPERCASE for key words or phrases
+- Use emojis sparingly (1-3 max) for visual interest
+- Use line breaks and whitespace for readability
+- Use bullet points with dashes (-) or arrows (→) for lists
 - Keep it concise (150-250 words max)
 - Focus on progress and learning, not perfection
 - Be authentic about challenges faced
-- Include 2-3 relevant tech hashtags
-- Don't use clichés or excessive emojis
-- Encourage other developers to share their progress
+- Include 2-3 relevant tech hashtags at the end
+- Don't use clichés like "excited to announce"
+- End with a question to encourage engagement
 
-Write the LinkedIn post now:`;
+Write the LinkedIn post now (remember: NO markdown, NO **asterisks** for bold):`;
 
   return await callGroqAPI(prompt, settings.groqApiKey);
 };
@@ -174,7 +180,7 @@ const callGroqAPI = async (prompt, apiKey) => {
         messages: [
           {
             role: 'system',
-            content: 'You are a professional LinkedIn content creator who writes authentic, engaging posts that focus on learning and growth. You never use clichés or sound promotional.',
+            content: 'You are a professional LinkedIn content creator who writes authentic, engaging posts. CRITICAL: LinkedIn does NOT render markdown. Never use **asterisks** for bold or *asterisks* for italics. For emphasis, use UPPERCASE words, emojis, or line breaks. Focus on learning and growth. Never sound promotional or use clichés.',
           },
           {
             role: 'user',
